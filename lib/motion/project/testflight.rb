@@ -128,8 +128,9 @@ namespace 'testflight' do
       end
     end  
   
-    curl = "/usr/bin/curl http://testflightapp.com/api/builds.json -F file=@\"#{App.config.archive}\" -F dsym=@\"#{app_dsym_zip}\" -F api_token='#{prefs.api_token}' -F team_token='#{prefs.team_token}' -F notes=\"#{notes}\" -F notify=#{prefs.notify ? "True" : "False"} | more"
+    curl = "/usr/bin/curl http://testflightapp.com/api/builds.json -F file=@\"#{App.config.archive}\" -F dsym=@\"#{app_dsym_zip}\" -F api_token='#{prefs.api_token}' -F team_token='#{prefs.team_token}' -F notes=\"#{notes}\" -F notify=#{prefs.notify ? "True" : "False"}"
     curl << " -F distribution_lists='#{distribution_lists}'" if distribution_lists
+    curl << " | more"
     App.info 'Run', curl
     sh curl
   end
